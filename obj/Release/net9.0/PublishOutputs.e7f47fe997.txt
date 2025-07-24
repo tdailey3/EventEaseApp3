@@ -1,0 +1,2 @@
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\publish\sample-data\weather.json
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\publish\web.config

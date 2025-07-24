@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "O7EH3rzcu40=",
+  "dgSpecHash": "UPU4GzEZkSA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\tdail\\BlazorDev\\EventEaseApp\\EventEaseApp.csproj",
+  "projectFilePath": "C:\\Users\\tdail\\OneDrive\\Documents\\GitHub\\EventEaseApp3\\EventEaseApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tdail\\.nuget\\packages\\microsoft.aspnetcore.authorization\\9.0.6\\microsoft.aspnetcore.authorization.9.0.6.nupkg.sha512",
     "C:\\Users\\tdail\\.nuget\\packages\\microsoft.aspnetcore.components\\9.0.6\\microsoft.aspnetcore.components.9.0.6.nupkg.sha512",
