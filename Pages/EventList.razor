@@ -1,0 +1,15 @@
+@code {
+    [Parameter]
+    public string? SortColumn { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnSort { get; set; }
+
+    // Add GetSortIcon method if not present
+    private string GetSortIcon(string column)
+    {
+        if (SortColumn != column) return "";
+        // You may want to pass sort direction as a parameter too
+        return "▲"; // Placeholder
+    }
+}

@@ -1,0 +1,36 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+@using EventEaseApp
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4 fw-bold text-primary">Event Ease App</h1>
+        <p class="lead mt-3">
+            Welcome to <strong>Event Ease App</strong> — your simple solution for managing events! <br />
+            This app allows you to easily add, edit, and complete events, making your event management
+            experience seamless and efficient. <br />
+            Whether you're planning a small gathering or a large event, this app has you covered.
+            Search and sort your event list, hide completed events, and stay on top of your schedule.
+        </p>
+        <hr />
+        <h5>Navigation</h5>
+        <ul class="list-unstyled">
+            <li>
+                <span class="fw-semibold">Events:</span> Manage your events, mark them as completed, and search or sort your list.
+                <NavLink href="events" class="ms-1">Go to Events Manager</NavLink>
+            </li>
+            <li>
+                <span class="fw-semibold">Counter:</span> Try out a simple counter demo.
+                <NavLink href="counter" class="ms-1">Go to Counter Demo</NavLink>
+            </li>
+            <li>
+                <span class="fw-semibold">Weather:</span> View a sample weather forecast page.
+                <NavLink href="weather" class="ms-1">Go to Weather Forecast</NavLink>
+            </li>
+        </ul>
+        <p class="mt-4">
+            Use the navigation menu on the left to explore the app features.
+        </p>
+    </div>
+</div>

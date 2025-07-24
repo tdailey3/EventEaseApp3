@@ -1,0 +1,236 @@
+@page "/events"
+@using EventEaseApp.Services
+@using EventEaseApp.Models
+@using Microsoft.AspNetCore.Components.Web
+
+
+@inject EventServices EventService
+@inject EventCardModel EventCard
+@inject EventEaseApp.Services.AttendanceService AttendanceService
+@inject EventEaseApp.Models.UserSessionModel UserSession
+
+<PageTitle>Event Manager</PageTitle>
+<h2>Event Manager</h2>
+
+<div class="mb-3">
+    <h4>Add/Edit Event</h4>
+    <EventEaseApp.Components.EventForm
+        CurrentEvent="currentEvent"
+        EditId="editId"
+        OnSubmit="HandleSubmit"
+        OnCancel="CancelEdit" />
+</div>
+
+<div class="mb-3">
+    <input class="form-control mb-2" type="text" placeholder="Search by name, date, or location..." @bind="searchTerm"  @bind:event="oninput" />
+    <button class="btn btn-outline-secondary me-2" type="button" @onclick="ClearSearch">Clear Search</button>
+    <button class="btn btn-outline-warning" type="button" @onclick="ToggleHideCompleted">
+        @(hideCompleted ? "Show Completed" : "Hide Completed")
+    </button>
+</div>
+
+<h4>Event List</h4>
+<EventEaseApp.Components.EventList
+    Events="VisibleEvents"
+    SortColumn="sortColumn"
+    SortAscending="sortAscending"
+    OnSort="SortBy"
+    OnComplete="CompleteEvent"
+    OnUndoComplete="UndoCompleteEvent"
+    OnEdit="EditEvent"
+    OnDelete="ShowDeleteConfirmation" />
+
+<EventEaseApp.Components.DeleteEventModal
+    Show="showDeleteConfirmation"
+    Event="EventService.Events.FirstOrDefault(e => e.Id == deleteId)"
+    OnConfirm="ConfirmDeleteAsync"
+    OnCancel="CancelDelete" />
+
+@code {
+    private EventCardModel currentEvent = new();
+    private Guid editId = Guid.Empty;
+
+    private bool showDeleteConfirmation = false;
+    private Guid deleteId = Guid.Empty;
+
+    private string sortColumn = nameof(EventCard.EventDate);
+    private bool sortAscending = true;
+
+    private string searchTerm = "";
+
+@*     private void OnSearchChanged(ChangeEventArgs e)
+{
+    searchTerm = e.Value?.ToString() ?? "";
+    StateHasChanged(); // refresh the UI
+} *@
+
+
+    private bool hideCompleted = false;
+
+    private void ToggleHideCompleted()
+    {
+        hideCompleted = !hideCompleted;
+    }
+    private static readonly string[] DateFormats = new[]
+    {
+        "MMMM dd, yyyy",
+        "MM-dd-yy",
+        "MM-dd-yyyy",
+        "MM/dd/yy",
+        "MM/dd/yyyy"
+    };
+
+    private bool MatchesDate(DateTime? eventDate, string search)
+    {
+        if (eventDate == null || string.IsNullOrWhiteSpace(search))
+            return false;
+
+        // Try to parse the search term as a date in any of the allowed formats
+        if (DateTime.TryParseExact(search, DateFormats, null, System.Globalization.DateTimeStyles.None, out var parsedDate))
+        {
+            // Compare only the date part
+            return eventDate.Value.Date == parsedDate.Date;
+        }
+
+        // Also allow searching by formatted date string
+        foreach (var format in DateFormats)
+        {
+            if (eventDate.Value.ToString(format).Contains(search, StringComparison.OrdinalIgnoreCase))
+                return true;
+        }
+
+        return false;
+    }
+    private void SortBy(string column)
+    {
+        if (sortColumn == column)
+        {
+            sortAscending = !sortAscending;
+        }
+        else
+        {
+            sortColumn = column;
+            sortAscending = true;
+        }
+    }
+
+    private string GetSortIcon(string column)
+    {
+        if (sortColumn != column) return "";
+        return sortAscending ? "▲" : "▼";
+    }
+
+    private void HandleSubmit()
+    {
+        if (editId == Guid.Empty)
+        {
+            EventService.AddEvent(currentEvent);
+        }
+        else
+        {
+            EventService.EditEvent(editId, currentEvent);
+        }
+        currentEvent = new EventCardModel();
+        editId = Guid.Empty;
+    }
+
+    private void EditEvent(Guid id)
+    {
+        var evt = EventService.Events.FirstOrDefault(e => e.Id == id);
+        if (evt != null)
+        {
+            currentEvent = new EventCardModel
+            {
+                Id = evt.Id,
+                EventName = evt.EventName,
+                EventDate = evt.EventDate,
+                Location = evt.Location,
+                IsCompleted = evt.IsCompleted
+            };
+            editId = id;
+        }
+    }
+
+    private void CancelEdit()
+    {
+        currentEvent = new EventCardModel();
+        editId = Guid.Empty;
+    }
+
+    private void CompleteEvent(Guid id)
+    {
+        var evt = EventService.Events.FirstOrDefault(e => e.Id == id);
+        if (evt != null)
+        {
+            evt.IsCompleted = true;
+        }
+    }
+
+    private void UndoCompleteEvent(Guid id)
+    {
+        EventService.UndoCompleteEvent(id);
+    }
+
+    private void ShowDeleteConfirmation(Guid id)
+    {
+        showDeleteConfirmation = true;
+        deleteId = id;
+    }
+
+    private async Task ConfirmDeleteAsync()
+    {
+        await EventService.DeleteEventAsync(deleteId);
+        CancelEdit();
+        showDeleteConfirmation = false;
+        deleteId = Guid.Empty;
+    }
+
+    private void CancelDelete()
+    {
+        showDeleteConfirmation = false;
+        deleteId = Guid.Empty;
+    }
+
+    private void ClearSearch()
+    {
+        searchTerm = "";
+    }
+
+    private IEnumerable<EventCardModel> VisibleEvents =>
+        (sortAscending
+            ? EventService.Events
+                .Where(e =>
+                    (string.IsNullOrWhiteSpace(searchTerm)
+                        || (e.EventName?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
+                        || MatchesDate(e.EventDate, searchTerm)
+                        || (e.Location?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false))
+                    && (!hideCompleted || !e.IsCompleted)
+                )
+                .OrderBy<EventCardModel, object>(e => sortColumn switch
+                {
+                    nameof(EventCardModel.EventIntId) => e.EventIntId,
+                    nameof(EventCardModel.EventName) => e.EventName ?? "",
+                    nameof(EventCardModel.EventDate) => e.EventDate ?? DateTime.MinValue,
+                    nameof(EventCardModel.Location) => e.Location ?? "",
+                    nameof(EventCardModel.IsCompleted) => e.IsCompleted,
+                    _ => e.EventIntId
+                })
+            : EventService.Events
+                .Where(e =>
+                    (string.IsNullOrWhiteSpace(searchTerm)
+                        || (e.EventName?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false)
+                        || MatchesDate(e.EventDate, searchTerm)
+                        || (e.Location?.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ?? false))
+                    && (!hideCompleted || !e.IsCompleted)
+                )
+                .OrderByDescending<EventCardModel, object>(e => sortColumn switch
+                {
+                    nameof(EventCardModel.EventIntId) => e.EventIntId,
+                    nameof(EventCardModel.EventName) => e.EventName ?? "",
+                    nameof(EventCardModel.EventDate) => e.EventDate ?? DateTime.MinValue,
+                    nameof(EventCardModel.Location) => e.Location ?? "",
+                    nameof(EventCardModel.IsCompleted) => e.IsCompleted,
+                    _ => e.EventIntId
+                })
+        );
+}

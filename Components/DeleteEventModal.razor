@@ -1,0 +1,39 @@
+@using EventEaseApp.Models
+
+@if (Show)
+{
+    <div class="modal fade show d-block" tabindex="-1" style="background:rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Event</h5>
+                    <button type="button" class="btn-close" @onclick="OnCancel"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>Are you sure you want to delete this event?</strong>
+                    <br />
+                    @if (Event != null)
+                    {
+                        <span>
+                            <b>ID:</b> @Event.EventIntId<br />
+                            <b>Name:</b> @Event.EventName<br />
+                            <b>Date:</b> @Event.EventDate?.ToString("MMMM dd, yyyy")<br />
+                            <b>Location:</b> @Event.Location
+                        </span>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger me-2" @onclick="OnConfirm">Yes, Delete</button>
+                    <button class="btn btn-secondary" @onclick="OnCancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool Show { get; set; }
+    [Parameter] public EventCardModel? Event { get; set; }
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+}

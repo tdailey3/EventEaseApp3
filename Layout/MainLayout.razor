@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+@using EventEaseApp.Services
+@using Microsoft.AspNetCore.Components.Routing
+@inject EventServices EventServices
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+               <NavLink href="/" class="btn btn-outline-primary w-10">
+                   <span class="bi bi-house-door-fill me-2" aria-hidden="true"></span> Home
+               </NavLink>
+        </div>
+        
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

@@ -1,0 +1,23 @@
+@using EventEaseApp.Models
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components
+
+<EditForm Model="@CurrentEvent" OnValidSubmit="@OnSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <InputText @bind-Value="CurrentEvent.EventName" placeholder="Event Name" class="form-control mb-2" required />
+    <InputDate @bind-Value="CurrentEvent.EventDate" class="form-control mb-2" required />
+    <InputText @bind-Value="CurrentEvent.Location" placeholder="Location" class="form-control mb-2" />
+    <button type="submit" class="btn btn-primary">@((EditId == Guid.Empty) ? "Add Event" : "Update Event")</button>
+    @if (EditId != Guid.Empty)
+    {
+        <button type="button" class="btn btn-secondary ms-2" @onclick="OnCancel">Cancel</button>
+    }
+</EditForm>
+
+@code {
+    [Parameter] public EventCardModel CurrentEvent { get; set; } = new();
+    [Parameter] public Guid EditId { get; set; }
+    [Parameter] public EventCallback OnSubmit { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+}

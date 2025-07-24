@@ -1,0 +1,128 @@
+@page "/register"
+@using System.ComponentModel.DataAnnotations
+@inject EventEaseApp.Models.UserSessionModel UserSession
+@inject EventEaseApp.Services.AttendanceService AttendanceService
+@inject EventEaseApp.Services.EventServices EventService
+
+<h3>Event Registration</h3>
+
+<EditForm Model="@registrationModel" OnValidSubmit="@HandleRegistration">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <InputText id="name" class="form-control" @bind-Value="registrationModel.Name" />
+        <ValidationMessage For="@(() => registrationModel.Name)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="registrationModel.Email" />
+        <ValidationMessage For="@(() => registrationModel.Email)" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+
+@if (successMessage != null)
+{
+    <div class="alert alert-success mt-3">@successMessage</div>
+}
+
+<hr class="my-4" />
+
+<h3>Mark Attendance</h3>
+<EditForm Model="@loginModel" OnValidSubmit="@HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="loginEmail" class="form-label">Email</label>
+        <InputText id="loginEmail" class="form-control" @bind-Value="loginModel.Email" />
+        <ValidationMessage For="@(() => loginModel.Email)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="eventSelect" class="form-label">Select Event</label>
+        <InputSelect id="eventSelect" class="form-select" @bind-Value="selectedEventId">
+            <option value="">-- Select Event --</option>
+            @foreach (var evt in EventService.Events)
+            {
+                <option value="@evt.Id">@evt.EventName (@evt.EventDate?.ToString("MMMM dd, yyyy"))</option>
+            }
+        </InputSelect>
+    </div>
+
+    <button type="submit" class="btn btn-success me-2">Mark Attendance</button>
+    <button type="button" class="btn btn-outline-secondary" @onclick="ClearAttendanceForm">Clear</button>
+</EditForm>
+
+@if (attendanceMessage != null)
+{
+    <div class="alert alert-info mt-3">@attendanceMessage</div>
+}
+
+@code {
+    private RegistrationModel registrationModel = new();
+    private LoginModel loginModel = new();
+    private string? successMessage;
+    private string? attendanceMessage;
+    private Guid selectedEventId;
+
+    private void HandleRegistration()
+    {
+        UserSession.Register(registrationModel.Name!, registrationModel.Email!);
+        successMessage = $"Thank you for registering, {registrationModel.Name}!";
+        registrationModel = new RegistrationModel();
+    }
+
+    private async Task HandleLogin()
+    {
+        attendanceMessage = null;
+        var registered = !string.IsNullOrWhiteSpace(loginModel.Email) &&
+                         EventService.Events.Any() &&
+                         UserSession.Email == loginModel.Email;
+
+        if (string.IsNullOrWhiteSpace(loginModel.Email) || selectedEventId == Guid.Empty)
+        {
+            attendanceMessage = "Please enter your email and select an event.";
+            return;
+        }
+
+        // Check if the email is registered
+        if (UserSession.IsRegistered && UserSession.Email == loginModel.Email)
+        {
+            await AttendanceService.MarkAttendanceAsync(selectedEventId, loginModel.Email!, true);
+            attendanceMessage = $"Attendance marked successfully for {loginModel.Email} at {DateTime.Now:G}!";
+        }
+        else
+        {
+            attendanceMessage = "Please register first.";
+        }
+    }
+
+    private void ClearAttendanceForm()
+    {
+        loginModel = new LoginModel();
+        selectedEventId = Guid.Empty;
+        attendanceMessage = null;
+    }
+
+    public class RegistrationModel
+    {
+        [Required(ErrorMessage = "Name is required")]
+        public string? Name { get; set; }
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        public string? Email { get; set; }
+    }
+
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        public string? Email { get; set; }
+    }
+}
