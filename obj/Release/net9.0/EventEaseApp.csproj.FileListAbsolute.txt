@@ -199,8 +199,6 @@ C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroo
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.siod5s5bhc.wasm
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.iabc7f1dl7.pdb
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\blazor.boot.json
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\blazor.webassembly.js.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\Microsoft.AspNetCore.Authorization.phaa9r44xv.wasm.gz
@@ -403,8 +401,6 @@ C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroo
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat.gz
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.siod5s5bhc.wasm.gz
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.iabc7f1dl7.pdb.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\blazor.boot.json.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\sample-data\weather.json
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\EventEaseApp.staticwebassets.runtime.json
@@ -821,7 +817,6 @@ C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\scoped
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\blazor.build.boot-extension.json
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\blazor.boot.json
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\eotnszvkb1-8rbvw3on5j.gz
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\413vp4cml5-sbhfkxocvi.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\th6pzune3g-bqjiyaj88i.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\2l52lnvn0l-c2jlpeoesf.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\2xhm8ivb61-erw9l3u2r3.gz
@@ -1070,9 +1065,6 @@ C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compre
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\r489smiiq7-tjcz0u77k5.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\qvouh2q4mf-tptq2av103.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\hcxylcfklo-lfu7j35m59.gz
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\skwk8s9ui1-siod5s5bhc.gz
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\c1jhhq4o6d-iabc7f1dl7.gz
-C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\a1w0b3e4ey-ads0kwje5h.gz
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\staticwebassets.build.json
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\staticwebassets.build.json.cache
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\staticwebassets.development.json
@@ -1082,3 +1074,11 @@ C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\EventE
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\refint\EventEaseApp.dll
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\EventEaseApp.pdb
 C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\ref\EventEaseApp.dll
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.q6ypwdj5xw.wasm
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.urk7odndxa.pdb
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.q6ypwdj5xw.wasm.gz
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\bin\Release\net9.0\wwwroot\_framework\EventEaseApp.urk7odndxa.pdb.gz
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\413vp4cml5-r7u7ze9xh3.gz
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\skwk8s9ui1-q6ypwdj5xw.gz
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\c1jhhq4o6d-urk7odndxa.gz
+C:\Users\tdail\OneDrive\Documents\GitHub\EventEaseApp3\obj\Release\net9.0\compressed\a1w0b3e4ey-g2ocvske8m.gz
